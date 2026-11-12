@@ -1,0 +1,251 @@
+@import "tailwindcss";
+
+:root,
+[data-theme="light"] {
+  --bg-canvas: #f6f5f1;
+  --bg-surface: #ffffff;
+  --bg-subtle: #edeae2;
+  --border-subtle: #d6d3cb;
+  --border-control: #78746b;
+  --text-primary: #161b22;
+  --text-secondary: #4a525d;
+  --brand-primary: #0f4c5c;
+  --brand-hover: #0b3945;
+  --brand-fg: #ffffff;
+  --brand-tint: #e4f0f3;
+  --accent-primary: #b83b0b;
+  --accent-hover: #962f08;
+  --accent-fg: #ffffff;
+  --accent-text: #b83b0b;
+  --status-ok-bg: #dcfce7;
+  --status-ok-fg: #14532d;
+  --status-warn-bg: #ffedd5;
+  --status-warn-fg: #7c2d12;
+  --status-err-bg: #fee2e2;
+  --status-err-fg: #7f1d1d;
+  --status-neutral-bg: #e7e5e4;
+  --status-neutral-fg: #292524;
+  --danger-bg: #991b1b;
+  --danger-hover: #7f1d1d;
+  --danger-fg: #ffffff;
+  --dialog-backdrop: rgba(22, 27, 34, 0.56);
+}
+
+[data-theme="dark"] {
+  --bg-canvas: #101418;
+  --bg-surface: #171d24;
+  --bg-subtle: #1f2730;
+  --border-subtle: #28323d;
+  --border-control: #6a7685;
+  --text-primary: #f1f3f5;
+  --text-secondary: #a8b2be;
+  --brand-primary: #56b9d0;
+  --brand-hover: #71c7db;
+  --brand-fg: #0c181c;
+  --brand-tint: #152b33;
+  --accent-primary: #b83b0b;
+  --accent-hover: #9a3008;
+  --accent-fg: #ffffff;
+  --accent-text: #fb923c;
+  --status-ok-bg: #132a1c;
+  --status-ok-fg: #86efac;
+  --status-warn-bg: #2e1a11;
+  --status-warn-fg: #fdba74;
+  --status-err-bg: #321619;
+  --status-err-fg: #fca5a5;
+  --status-neutral-bg: #242c35;
+  --status-neutral-fg: #d1d5db;
+  --danger-bg: #b91c1c;
+  --danger-hover: #991b1b;
+  --danger-fg: #ffffff;
+  --dialog-backdrop: rgba(4, 8, 12, 0.72);
+}
+
+@layer base {
+  html {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  a[href],
+  button,
+  summary,
+  select,
+  label[for],
+  label:has(> input[type="checkbox"], > input[type="radio"]),
+  [role="button"],
+  [role="link"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  [role="switch"],
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="file"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"] {
+    cursor: pointer;
+  }
+
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-bottom: 5rem;
+  }
+}
+
+/* Override Tailwind v4 currentColor border fallback across all divide-y children including child 0 */
+.divide-y > :not(:last-child),
+.divide-y > * + * {
+  border-color: var(--border-subtle);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+.btn-accent {
+  background-color: var(--accent-primary);
+  color: var(--accent-fg);
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+.btn-accent:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+.btn-accent:active:not(:disabled) {
+  transform: translateY(0.5px);
+}
+
+.btn-surface {
+  background-color: var(--bg-surface);
+  border-color: var(--border-control);
+  color: var(--text-primary);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.btn-surface:hover:not(:disabled) {
+  background-color: var(--bg-subtle);
+  border-color: var(--text-secondary);
+}
+.btn-surface:active:not(:disabled) {
+  background-color: var(--border-subtle);
+}
+
+.btn-subtle {
+  background-color: var(--bg-subtle);
+  border-color: var(--border-control);
+  color: var(--text-primary);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.btn-subtle:hover:not(:disabled) {
+  background-color: var(--border-subtle);
+}
+
+.btn-brand-tint {
+  background-color: var(--brand-tint);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.btn-brand-tint:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn-danger-solid {
+  background-color: var(--danger-bg);
+  border-color: var(--danger-bg);
+  color: var(--danger-fg);
+  transition: background-color 0.15s ease;
+}
+.btn-danger-solid:hover:not(:disabled) {
+  background-color: var(--danger-hover);
+  border-color: var(--danger-hover);
+}
+
+.btn-danger-tint {
+  background-color: var(--status-err-bg);
+  border-color: var(--status-err-fg);
+  color: var(--status-err-fg);
+  transition: opacity 0.15s ease;
+}
+.btn-danger-tint:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn-ok-tint {
+  background-color: var(--status-ok-bg);
+  border-color: var(--status-ok-fg);
+  color: var(--status-ok-fg);
+  transition: opacity 0.15s ease;
+}
+.btn-ok-tint:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.table-row-hover {
+  transition: background-color 0.12s ease;
+}
+.table-row-hover:hover {
+  background-color: var(--bg-subtle);
+  background-color: color-mix(in srgb, var(--bg-subtle) 55%, var(--bg-surface));
+}
+
+.nav-link-inactive {
+  color: var(--text-secondary);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.nav-link-inactive:hover {
+  background-color: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  background-color: var(--brand-primary);
+  color: var(--brand-fg);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  z-index: 100;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
